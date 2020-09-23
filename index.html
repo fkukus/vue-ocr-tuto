@@ -9,24 +9,27 @@
 	</head>
 	<body>
 		<div id="app">
-			<h1>La belle vue</h1>
+			<h1>{{ restaurant.name }}</h1>
 			<p class="description">
-				Bienvenue dans notre café la belle vue ! Nous sommes réputés pour notre
+				Bienvenue dans notre café {{ restaurant.name }} ! Nous sommes réputés pour notre
 				pain et nos merveilleuses pâtisseries. Faites vous plaisir dès le matin
 				ou avec un goûter réconfortant. Mais attention, vous verrez qu'il est
 				difficile de s'arrêter.
       </p>
-      <p>
-        {{ restaurantName }}
-      </p>
-      <p>
-        {{ message }}
-      </p>
-      <p>
-        {{ (9 - 2) + 10 }}
-      </p>
+
+      <h2>Contactez-nous</h2>
+      <p>Adresse : {{ restaurant.address }}</p>
+      <p>Téléphone : {{ restaurant.phone }}</p>
+      <p>Email : {{ restaurant.email }}</p>
+      <p>Horaires :</p>
+      <ul>
+        <li>L-V: 06:00 à 16:00</li>
+        <li>Samedi: 07:00 à 14:00</li>
+        <li>Dimanche: 07:00 à 12:00</li>
+      </ul>
+
 			<footer class="footer">
-				<p>Copyright La belle vue 2020</p>
+				<p>{{ copyright }}</p>
 			</footer>
 		</div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -34,8 +37,17 @@
       const vm = new Vue({
         el: "#app",
         data: {
-          message: "Salut la compagnie !",
-          restaurantName: "Chez woam"
+          restaurant: {
+            name: "Café avec vue",
+            address: "18 avene du Beurre, Paris, France",
+            email: "hello@cafewithavue.bakery",
+            phone: "01 88 88 88 88",
+          },
+        },
+        computed: {
+          copyright() {
+            return "Copyright " + this.restaurant.name + ' ' + new Date().getFullYear()
+          }
         }
       })
     </script>
