@@ -35,50 +35,16 @@
 <script>
 // @ is an alias to /src
 import MenuItem from '@/components/MenuItem.vue'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
-  name: 'App',
+  name: 'Home',
   components: {
     MenuItem
   },
-  data: () => {
-    return {
-      restaurentName: "La belle vue",
-      simpleMenu: [
-        {
-          name: "Croissant",
-          inStock: true,
-          quantity: 1,
-          price: 1,
-        },
-        {
-          name: "Baguette de pain",
-          image: {
-            source: "/images/french-baguette.jpeg",
-            alt: "Quatre baguettes de pain"
-          },
-          inStock: true,
-          quantity: 1,
-          price: 1.2
-        },
-        {
-          name: "Éclair",
-          image: {
-            source: "/images/eclair.jpg",
-            alt: "Éclair au chocolat"
-          },
-          inStock: false,
-          quantity: 1,
-          price: 1.6
-        }
-      ],
-      shoppingCart: 0
-    }
-  },
   computed: {
-    copyright() {
-      return "Copyright " + this.restaurentName + ' ' + new Date().getFullYear()
-    }
+    ...mapState(['shoppingCart', 'restaurentName', 'simpleMenu']),
+    ...mapGetters(['copyright']),
   },
   methods: {
     addToShoppingCart(payload) {
