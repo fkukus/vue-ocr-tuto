@@ -13,7 +13,7 @@
       <div v-if="inStock">
         <label for="add-item-quantity">Quantité :</label>
         <input id="add-item-quantity" type="number" v-model.number="quantity" />
-        <button @click="addFunction(quantity)">Ajouter au panier d'achat</button>
+        <button @click="updateShoppingCart">Ajouter au panier d'achat</button>
       </div>
     </div>
   </div>
@@ -22,14 +22,31 @@
 <script>
 export default {
   name: 'MenuItem',
-  props: [
-    'name',
-    'image',
-    'quantity',
-    'inStock',
-    'addFunction',
-    'price'
-  ],
+  props: {
+    name: {
+      type: String,
+      required: true,
+    },
+    image: {
+      type: Object,
+      default: () => ({
+        source: 'https://picsum.photos/id/112/300/200',
+        alt: 'Illustration',
+      })
+    },
+    quantity: {
+      type: Number,
+      default: 1,
+    },
+    inStock: {
+      type: Boolean,
+      default: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
+  },
   data() {
     return {
       discount: 0
@@ -54,10 +71,15 @@ export default {
       this.discount = -10
     }
   },
+  methods: {
+    updateShoppingCart() {
+      this.$emit('add-items-to-cart', { quantity: this.quantity })
+    }
+  }
 }
 </script>
 
-<style>
+<style lang="scss">
 .menu-item {
   display: flex;
   width: 500px;

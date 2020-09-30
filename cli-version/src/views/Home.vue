@@ -17,8 +17,8 @@
           :image="item.image"
           :quantity="item.quantity"
           :inStock="item.inStock"
-          :addFunction="addToShoppingCart"
           :price="item.price"
+          @add-items-to-cart="addToShoppingCart"
         />
       </section>
 
@@ -47,10 +47,6 @@ export default {
       simpleMenu: [
         {
           name: "Croissant",
-          image: {
-            source: "/images/croissant.jpg",
-            alt: "Un croissant"
-          },
           inStock: true,
           quantity: 1,
           price: 1,
@@ -85,8 +81,8 @@ export default {
     }
   },
   methods: {
-    addToShoppingCart(quantity) {
-      this.shoppingCart += quantity
+    addToShoppingCart(payload) {
+      this.shoppingCart += payload.quantity
     }
   },
 }
