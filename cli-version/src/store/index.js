@@ -44,8 +44,14 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    INCREMENT_SHOPPING_CART(state, payload = 1) {
+      state.shoppingCart += payload
+    }
   },
   actions: {
+    addToShoppingCart({ commit }, payload) {
+      commit('INCREMENT_SHOPPING_CART', payload)
+    }
   },
   modules: {
   }

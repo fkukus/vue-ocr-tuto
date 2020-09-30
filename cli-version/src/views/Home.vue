@@ -18,7 +18,6 @@
           :quantity="item.quantity"
           :inStock="item.inStock"
           :price="item.price"
-          @add-items-to-cart="addToShoppingCart"
         />
       </section>
 
@@ -45,11 +44,6 @@ export default {
   computed: {
     ...mapState(['shoppingCart', 'restaurentName', 'simpleMenu']),
     ...mapGetters(['copyright']),
-  },
-  methods: {
-    addToShoppingCart(payload) {
-      this.shoppingCart += payload.quantity
-    }
   },
 }
 </script>
