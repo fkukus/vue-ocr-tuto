@@ -9,6 +9,7 @@
       <h3>{{ name }}</h3>
       <p v-if="inStock">En stock</p>
       <p v-else>En rupture de stock</p>
+      <h4>{{ getPrice }}</h4>
       <div v-if="inStock">
         <label for="add-item-quantity">Quantité :</label>
         <input id="add-item-quantity" type="number" v-model.number="quantity" />
@@ -26,8 +27,33 @@ export default {
     'image',
     'quantity',
     'inStock',
-    'addFunction'
-  ]
+    'addFunction',
+    'price'
+  ],
+  data() {
+    return {
+      discount: 0
+    }
+  },
+  computed: {
+    getPrice() {
+      const calculatedPrice = (this.price * (100 + this.discount) / 100).toFixed(2)
+      let formatedDiscount = ''
+
+      if (this.discount !== 0) {
+        formatedDiscount = ' (' + this.discount + '%)'
+      }
+
+      return calculatedPrice + ' €' + formatedDiscount
+    }
+  },
+  beforeMount() {
+    const today = new Date().getDate()
+    
+    if (today % 2 === 0) {
+      this.discount = -10
+    }
+  },
 }
 </script>
 
